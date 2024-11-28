@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                const {useState} = React 
+
+                //-----------------
+                //not a best practice
+                // function SearchBox(props){
+                //     return(//below input text is maintaining its own state which is not a best practice instead it should be controlled by a component's state variable using useState
+                //         <div>
+                //             <input type="text"/> 
+                //         </div>
+                //     )
+                // }
+                //-------------------The best practice - introduce stateVariable
+                
+                function SearchBox(props){ 
+                    const [search, setSearch] = useState('')
+                    const handleSearchChange=(e)=>{//'e' helps to read the value into e.target.value when we type in search box.
+                        const inputSearch=e.target.value
+                        setSearch(inputSearch)
+                    }
+
+                    return (//now this is a best std practice
+                        <input type="text" value={search} onChange={handleSearchChange}/>//clicked text will be handled in handleSearchChange call-back function
+                    ) //input filed's value=search is being controlled by react i.e above search stateVariable hence its called as controlled component
+                }
+
+                ReactDOM.render(<SearchBox/>, rootHandle)
+        </script>
+    </body>
+</html>

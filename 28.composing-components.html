@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Composing component - App component
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                //Composing component - App component
+
+                const user=[
+                    {id:1, title:"abc - true", isCompleted:true},
+                    {id:2, title:"def - false", isCompleted:false},
+                    {id:3, title:"ghi - true", isCompleted:true}
+                ]
+
+                // const final=user.filter((u)=>{
+                //     return u.isCompleted
+                // })
+
+                // function UserConfirmation(props){
+                //     return (
+                //         <ul>
+                //             {props.user.map((u)=>{
+                //                 return <li key={u.id}>{u.title}</li>
+                //             })}             
+                //         </ul>
+                //     )
+                // }
+
+                // const element=<UserConfirmation user={final} />
+
+                    const cmpltdTasks=user.filter((u)=>{
+                        return u.isCompleted
+                    })
+
+                    const incmpltdTasks=user.filter((u)=>{
+                        return !u.isCompleted
+                    })
+
+                    function ListTasks(props){ //Listing of task only written once and reused as per requirement below
+                        return ( //instead of creating "ul" tag multiple times just created inside a component and reused.
+                        <div>
+                        <h2>{props.text} Tasks ({props.user.length})</h2>   
+                        <ul>
+                                {props.user.map((u)=>{
+                                   return <li key={u.id}>{u.title}</li>
+                                })}
+                            </ul>
+                            </div>
+                        )
+                    }
+                
+                //const element=<ListTasks user={cmpltdTasks}/> // only to display completed tasks.
+
+                //============if also incompleted to be displayed
+                //In react when we create a component it can refer to other components in their output like here component "App()" referring "ListTasks" component multiple times while rendering below. its a standard practice 
+                //Thus List Tasks component rendered multiple times //in general this App component will be in top while working with react.
+                function App(){
+                    return (     //we could able to controle and pass any value that we need to the component and make it more dynamic in nature(not hardcoding)
+                            <div>
+                                <ListTasks user={user} text='All'/> 
+                                
+                                <ListTasks user={cmpltdTasks} text='Completed'/>
+                                {/*We can also filter here itself i.e - <ListTasks user={user.filter(u=>u.isCompleted)} text='Completed' //but this doable but not preferable as this isnt reusable and code doesnt look clean hence always store values in a Variable only like above*/}
+
+                                <ListTasks user={incmpltdTasks} text='Incomplete'/>
+                            </div>
+                        )
+                }
+
+                ReactDOM.render(<App/>, rootHandle)
+        </script>
+    </body>
+</html>

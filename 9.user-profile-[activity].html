@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            User profile - Activity
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                const user={
+                    first_name:'WinWireLogo',
+                    email:'w777@gmail.com',
+                    avatar:'https://www.winwire.com/wp-content/themes/winwirewp-theme/assets/images/logos/logo.png'
+                }
+                //name h2, image, email para
+
+                const userProfile=(
+                    <div>
+                        <h2>{user.first_name}</h2>
+                        <img src={user.avatar}/>
+                        <p>{user.email}</p>
+                        </div>
+                )
+
+                ReactDOM.render(userProfile,rootHandle)
+        </script>
+    </body>
+</html>

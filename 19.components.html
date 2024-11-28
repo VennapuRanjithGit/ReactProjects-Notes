@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Woking with components
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                //below is all about a 1. functional component
+
+                //fun starting letter should be capital alwasys. props/keys/p all are same can use any
+                //components objective is to return react elements inside it
+                function Greetcomponent(props){// creation of component
+                    //console.log(props) // to just check the values of props. to check >>browser>> inspect>> console
+                    return <h1>Hello, {props.name} from {props.company} </h1> // return react element
+                }
+
+                //const ele=Greetcomponent() //invoking the above function without values/args in it
+                // const ele=Greetcomponent( //with values/args; if its a components then its values should be object so use {}
+                //     {name:'JohnKennedy', company:'WW'}//passing multiple properties/values/data
+                // )   //this is general way of invoking react coponent but prefered way is below
+
+                //=====================React specail syntax for calling component
+                const ele=<Greetcomponent name='JohnKennedy' company='WW'/> //passing props to the above component
+                
+
+                ReactDOM.render(ele, rootHandle)
+        </script>
+    </body>
+</html>

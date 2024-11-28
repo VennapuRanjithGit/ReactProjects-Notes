@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                function MenuItem(props){
+                    const {name, isVeg, image, price}=props
+                    return(
+                        <div>
+                            <h2>{isVeg ? <IsVeg/> : <IsNonVeg/>} {name} </h2>
+                            <ItemPic imageUrl={image} name={name}/>
+                            <p>INR: {price}</p>
+                            <hr/>
+                        </div>
+                    )
+                }
+
+                function ItemPic(props){
+                    const {imageUrl}=props
+                    return <img src={imageUrl} alt={name}/>
+                }
+
+                function IsVeg(props){
+                    return <img src='https://i.ibb.co/kQQyRwP/veg.png' alt='veg icon'/>
+                }
+                
+                function IsNonVeg(props){
+                    return <img src='https://i.ibb.co/stN0gCz/non-veg.png' alt='non-veg icon'/>
+                }
+
+                function App(props){
+                    const menuItems=[
+                        {id:1, name:'Aloo Dum Biryani', price:'110', isVeg:true,image:'https://images.pexels.com/photos/2673353/pexels-photo-2673353.jpeg?auto=compress&cs=tinysrgb&w=600'},
+                        {id:2, name:'Chicken Dum Biryani', price:'150', isVeg:false, image:'https://images.pexels.com/photos/14731729/pexels-photo-14731729.jpeg?auto=compress&cs=tinysrgb&w=600'},
+                        {id:3, name:'Paneer tikka', price:'180', isVeg:true, image:'https://images.pexels.com/photos/12916869/pexels-photo-12916869.jpeg?auto=compress&cs=tinysrgb&w=600'},
+                        {id:4, name:'Chicken Kebab', price:'160', isVeg:false, image:'https://images.pexels.com/photos/9743517/pexels-photo-9743517.jpeg?auto=compress&cs=tinysrgb&w=600'},
+                    ]
+                    return(
+                        <div>
+                            <h1>Menu Items</h1>
+                            {menuItems.map((item)=>{
+                                //return <MenuItem key={item.id} name={item.name} price={item.isVeg} image={item.image}/>
+                                    //or use the "Spread Operator i.e {...item}"
+                                    return <MenuItem key={item.id} {...item}/>
+                            })}
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<App/>, rootHandle)
+        </script>
+    </body>
+</html>

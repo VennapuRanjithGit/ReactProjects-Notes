@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Displaying social Links
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                const user=[
+                    {id:1, name:'Google', url:'https://www.google.com'},
+                    {id:2, name:'WinWire', url:'https://www.winwire.com'},
+                    {id:3, name:'Microsoft', url:'https://www.microsoft.com'}
+                ]
+
+                const socialInfo=(
+                    <div>
+                        <h2>Total no of websites - {user.length}</h2>
+                        
+                        <ul>
+                            {user.map((info)=>{
+                                    return <li key={info.id}>
+                                                <a href={info.url} target="_blank">
+                                                    {info.name}
+                                                </a>
+                                           </li>
+                                })}
+                        </ul>
+                    </div>
+                )
+                
+                ReactDOM.render(socialInfo, rootHandle)
+        </script>
+    </body>
+</html>

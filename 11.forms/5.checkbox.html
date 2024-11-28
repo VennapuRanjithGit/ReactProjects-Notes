@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                const {useState} = React 
+                
+                function TableReservation(props){
+                    const [username, setUsername] = useState('')
+                    const [vegOption, setVegOption] = useState(false)
+
+                    const handleUsername=(e)=>{
+                        const userInput = e.target.value 
+                        setUsername(userInput)
+                    }
+
+                    const handleVegOptionChange=(e)=>{
+                        const vegInput=e.target.checked 
+                        setVegOption(vegInput)
+                    }
+
+                    const handleSubmit=(e)=>{
+                        e.preventDefault()
+                        alert(`${username} - Veg preference - ${vegOption ? 'yes' : 'no'}`)
+                    }
+                    
+                    return (
+                        <form onSubmit={handleSubmit}>
+                            <label>Username: </label><br/>
+                            <input type='text' value={username} onChange={handleUsername}/><br/>
+
+                            <label>Veg only: </label>
+                            <input type='checkbox' checked={vegOption} onChange={handleVegOptionChange}/><br/> {/*we wont work with value prop in checkbox instead we us checked prop. in all other fields we mostly work with value prop.*/}
+                            <input type='submit' value='Reserve'/>
+                        </form>
+                    )
+                }
+                ReactDOM.render(<TableReservation/>, rootHandle)
+        </script>
+    </body>
+</html>

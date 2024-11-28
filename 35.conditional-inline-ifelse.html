@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            In-line if-else
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+ 
+                //items in array passed to CartStatus component via props called {items} from Parent component App to Child component CartStatus
+
+                function CartStatus(props){//child component
+                    //console.log(props) // to know what actually props are. here props are array of object with 2 values/data
+                    const {items}=props//ES6 Object destructuring/new feature. //extract items into independent variable and use it instead of using props.items always as it is repetitive
+                    console.log(items)
+                    return(//Inline-ifelse:: condition ? true: false
+                        <div>
+                            {/*//instead of props.items we can use items only //using ES6 DES it will be easy to use dat in props thru a variable instead of accessing data thru props always
+                                (props.items.length>0) ? (
+                                    <p>Your cart has {props.items.length} </p>
+                                ) : (
+                                    <p>Oopse! Your cart is Empty</p>
+                                )
+                            */
+                            (items.length>0) ? (
+                                    <p>Your cart has {items.length} </p>
+                                ) : (
+                                    <p>Oopse! Your cart is Empty</p>
+                                )
+                            }
+                        </div>
+                    )
+                }
+
+                function App(props){//parent component
+                    //const items=[2,3,1] 
+                    const items=[
+                        {id:1,name:'dell',quantity:20},
+                        {id:2,name:'hp',quantiy:30}
+                    ]
+                    return(
+                        <div>
+                            <h2>Cart Page</h2>
+                            <CartStatus items={items}/>
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<App/>, rootHandle)
+        </script>
+    </body>
+</html>

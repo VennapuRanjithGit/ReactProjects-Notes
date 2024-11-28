@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+//====================== How to pass arguments to Event handlers
+
+// First Create Users array which contains array elements i.e multile user objects. each of object will have certain properties like id, name, email etc.
+
+// 1. Create a component
+//    1.1. Component name shoud start with uppercase. we knw that a component or functional cmpnent can have only one arg i.e props 
+// 2. pass users array as a prop to the component
+// 3. return a list of users
+//    3.1. Using the array of info will build an Unordered List (Ul tag) and will return that list.
+// Then We will call the above component and call one prop called users(name of the prop) and the value/info of it is users(contains array)
+// To check the props value just mention console.log(prop) in component function before return.
+// -->next embed JSX inside the list UL
+
+// 4. each user to have a button
+//    4.1. Each user separate button 
+// -->buttons should be mentioned inside return stmnt. Thus separate buttons will be created  
+// 5. When clicked , display respected user details in alert box.
+// ---> As on clicked certain data to be showed in alert box hence, we need to define a event handler as on click a specific function gets called. so for button created above just specify onClick() event handler.
+
+                const users=[ //users Array which contain 3 user objects.
+                    {id:1, name:'dell', email:'dell@gmail.com'},
+                    {id:2, name:'hp', email:'hp@gmail.com'},
+                    {id:3, name:'lenovo', email:'lenovo@gmail.com'},
+                    {id:4, name:'honor', email:'honor@gmail.com'}
+                ]
+
+                function UserList(props){
+                    console.log(props)
+                    function showDetails(user){
+                        console.log(user)
+                        alert(`${user.id} - ${user.name} - ${user.email}`)
+                    }
+                    console.log(props)
+                    return (
+                        <ul>
+                            {props.users.map((user)=>{//to map over each object in array and to show the list of users on screen
+                                return <li key={user.id}>{user.name} <button onClick={()=>{showDetails(user)}}>Show details</button> </li>//to get name; as li specifies a key to identity for each object. in showDetails we should pass user whos details to be displayed on screen. here its user object.
+                                        //create the showDetails function above to get alert when called. The moment we used () it is invoking a function.
+                                        //need to specify inline function, inside it pass user as an arg to it. by doing this we can pre check in browser inspecting, whtr specified user details are getting or not on clicking particular user.
+                                        //then we can confirm our requirement
+                                        //here while looping the specific user details through (user) , the same details will be passed to showDetails function's user and same will be displayed.
+                                        //here inline fun becomes call back func
+                                        //next we need to display same user details so use alert box inside showDet
+                                    })}
+                        </ul>
+                    )
+                }
+
+                const ele= <UserList users={users}/> // calling the component and passing the users array as a prop to the component
+
+             
+                ReactDOM.render(ele, rootHandle)
+        </script>
+    </body>
+</html>

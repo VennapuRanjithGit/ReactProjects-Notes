@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Use-Effect hook
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                //first import useeffect hook from react i.e  then use it inside func before return
+                const {useEffect} = React 
+
+                function SampleComponent(props){
+                    //using of a useeffect i.e lke a func call. to perform any kind of side effects we use useEffect inside react
+                    //it is called wnvr a component rendered as well as re rendered simultaneously
+                    useEffect(()=>{
+                        //causing a side effect
+                        document.title = 'Sample Comp' //actual title given above will change to this one as we are modifying or causing a side effect to document which is a external source.
+                    }) //wnr executed or rendered it first gives above title then change to documnt.title
+
+                    return (
+                        <div>
+                            <h1>Sample Component</h1>
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<SampleComponent/>, rootHandle)
+        </script>
+    </body>
+</html>

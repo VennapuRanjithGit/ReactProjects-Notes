@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                //const user=['jack', 'jhon', 'jibeli', 'role', 'benett', 'triumph', 'harley', 'harshley', 'robin', 'kennedi', 'remo']
+
+                //------------------display list - hardcode way
+                //below we are hardcoding i.e manuallyaccessing(accessing using index) every user which is not standard practice. fine wn less number of elements but 
+                //if we have array of 1000 elements or records. therefore loops to be used
+                // const display=(
+                //     <ul>
+                //         <li>{user[0]}</li>
+                //         <li>{user[1]}</li>
+                //         <li>{user[2]}</li>
+                //     </ul>
+                // )
+
+                //----------------------------------display list - dynamic way using - loops
+                // 1. lets create a function displayDetails which takes user as an argument to return array of list items
+                // const displayDeatails=(user)=>{
+                //     const result=[] //first declare a variable with empty array for storing purpose
+                //     for(let  i=0; i<user.length; i++){ //loop over every single item in array
+                //         result.push(<li>{user[i]}</li>)//since the output is in array so will use push method of array to push/add every user into the list form via/using its index
+                //     }
+                //     return result
+                // } 
+
+                //user/we gonna call the above function to which we passed user as an argument and expect an array of list items to be returned from this funciton
+                // now if size of array increases then we dont need to manually enter the index again as this is dynamic.
+             
+
+                 //---------------------------------u can also use foreach instead of for loop i.e will return same o/p
+                // mobilebrand.forEach(element)=>{
+                //     result.push(<li>{element}</li>)
+                // }
+                //return result
+
+                //------------------------------------Theres a good contender for when u want to 1. perform any operation on every element inside array
+                //and 2. return it a array. for this we have "ArrayMap method"
+
+                //------- using arraymap method which also will return same o/p
+                //Note: even though 3 approaches gives same o/p we will be using arraymap method only as its standard and concise and efficient
+                // const displayDeatails=(mobilebrand)=>{
+                // const result=mobilebrand.map((element)=>{ //arraymap method.
+                //     return <li>{element}</li>
+                // })
+                // return result
+                // }
+
+                // const element=(
+                //     <ul>{displayDeatails(user)}</ul>
+                // )
+
+                //==========================Using map loop inside the JSX itself.
+                const user=['jack', 'jhon', 'jibeli', 'role', 'benett', 'triumph', 'harley', 'harshley', 'robin', 'kennedi', 'remo']
+                const element=(
+                    <ul>
+                        {user.map((eachitemtoloop)=>{
+                            return <li>{eachitemtoloop}</li>
+                        })}
+                    </ul>
+                )
+                ReactDOM.render(element,rootHandle)
+        </script>
+    </body>
+</html>

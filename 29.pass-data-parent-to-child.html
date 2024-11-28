@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+                Passing data from parent to child component
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                // function Parent(prop){
+                //     const name1='Gemini'
+                //     return (
+                //         <div>
+                //             <h1>Parent Component</h1>
+                //             <Child name={name1}/>
+                //         </div>
+                //     )
+                // }
+
+                // function Child(prop){
+                //     return(
+                //         <div>
+                //             <h2>Child Component -- {prop.name}</h2>
+                //         </div>
+                //     )
+                // }
+
+                const name='Dello'
+                const name1='olleD'
+                
+                function Parent(prop){
+                    return(
+                        <div>
+                            <h1>Parent component</h1>
+                                <Child nam={name}/>
+                                <Child nam={name1}/>
+                                <Child nam="You can also access this way just by putting nam string in prop i.e nam"/>
+                            </div>
+                    )
+                }
+
+                function Child(prop){
+                    return (
+                        <div>
+                          <h2>Child component -- Hello {prop.nam}</h2>
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<Parent/>, rootHandle)
+        </script>
+    </body>
+</html>

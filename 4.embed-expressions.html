@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Embed expressions
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                //------------perform arithmentic operations
+                //const element = <p>The sum of 2+45={2+45}</p>
+                //const element =<h1>The sum of 2+45={2+45}</h1>
+
+                //-------------access user object inside jsx
+                const user={
+                    firstName:'Demonty', //properties
+                    secondName:'Colony'
+                }
+                //const element=<p>Hello, {user.firstName}</p> //valid expression 
+                //or to use any javascript methods like touppercase() i.e const elemet =<P>Hello, {user.firstName.toUpperCase()}</p>
+                
+                //--------------call/invoke functions inside JSX
+                const fullName = (user) => {
+                    return `${user.firstName} ${user.secondName}` //note: this isnt jsx as theres nothing ref to html
+                }
+                const element=<h1>Hello, {fullName(user)}</h1> //invoking the function and then passing user as an parameter
+                ReactDOM.render(element, rootHandle)
+        </script>
+    </body>
+</html>

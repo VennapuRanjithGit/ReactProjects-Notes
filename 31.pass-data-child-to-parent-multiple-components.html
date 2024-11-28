@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+                Passing data - Child to Parent
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                //to pass data from child to parent use call back function
+                //if from parent to child use props
+                //below is child to parent
+                //wnver user clicks hug button we want parent to be notified a particular child has hugged indirectly data passed from child to parent using call back function
+
+                //1. declare a call back function in parent fun and pass it to child compon via props
+                function Parent(prop){
+                    const name1='ross'
+                    const name2='Joey'
+
+                        function getHugs(name){
+                            alert(`${name} has hugged parent`)
+                        }
+                    return(//here below call back func passed to child via prop name func... then it will be invoked in child componet below inside button
+                        <div>
+                            <h1>Parent component</h1>
+                            <Child name={name1} func={getHugs}/>
+                            <Child name={name2} func={getHugs}/>
+                        </div>
+                    )
+                }
+
+                
+                function Child(prop){
+                    return(
+                        <div>
+                        <h1>Child component - {prop.name}</h1>
+                        <button onClick={()=>{
+                            prop.func(prop.name)
+                        }}>Hug</button>
+                        </div>
+                    )
+                }
+                ReactDOM.render(<Parent/>, rootHandle)
+        </script>
+    </body>
+</html>

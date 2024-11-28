@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Think in React...
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                
+                //const str='Javascript'//declaring Variables
+                //const result= <p>{str} has {str.length} characters.</p>//use it inside JSX //inside JSX we can use any valid JS expression
+                //----------------------------------
+                //const mobilebrand=['Samsung', 'Apple', 'Motorola', 'Honor', 'Realme', 'Nokia']
+
+                // const brandList = mobilebrand => {
+                //     const result=[]
+                //     for(let i=0; i<mobilebrand.length; i++){
+                //         result.push(<li>{mobilebrand[i]}</li>)
+                //     }
+                //     //console.log(result)//to check out value of result array ue this and inspect> console u can see how it works
+                //     return result
+                // }
+
+                // const element=(
+                //     <ul>
+                //         {brandList(mobilebrand)}
+                //     </ul>
+                // )
+
+                //========================how to pass arguments to event handlers
+                // const users=[
+                //     {id:1, name:"physics", email:"physics@gmail.com"},
+                //     {id:2, name:"zoology", email:"zoology@gmail.com"},
+                //     {id:3, name:"botany", email:"botany@gmail.com"}
+                // ]
+
+                // function UserList(props){
+                //     function showDetails(user){
+                //             alert(`${user.id} - ${user.name} - ${user.email}`)
+                //     }
+
+                //     return (
+                //         <ul>
+                //             {props.users.map((user)=>{
+                //                 return (
+                //                     <li key={user.id}>{user.name}<button onClick={()=>showDetails(user)}>Show Details</button></li>
+                //                 )
+                //             })}
+                //         </ul>
+                //     )
+                // }
+
+                // const element=<UserList users={users}/>
+
+                //======================================
+                // const metals=[
+                //     {id:1, name:'Gold', origindet:'Gold@gmail.com', refnum:12},
+                //     {id:2, name:'Silver', origindet:'Silver@gmail.com', refnum:34},
+                //     {id:3, name:'Diamond', origindet:'Diamond@gmail.com', refnum:56},
+                //     {id:4, name:'Iron', origindet:'Iron@gmail.com', refnum:78}
+                // ]
+                
+                // function ListMetal(props){
+                //     function MetalBtn(metal){
+                //         alert(`${metal.id} - ${metal.name} - ${metal.origindet} - ${metal.refnum}`)
+                //     }
+                //     return (
+                //         <ul>
+                //             {props.metals.map((metal)=>{
+                //                 return(
+                //                     <li key={metal.id}>{metal.name}<button onClick={()=>MetalBtn(metal)}>Click to view {metal.name} details</button></li>
+                //                 )
+                //             })}
+                //         </ul>
+                //     )
+                // }
+
+                // const element=<ListMetal metals={metals}/>
+
+                //=================How to pass arguments to Event handlers
+
+                // const companies=[
+                //     {id:1, name:'TechZen', address:'Kondapur, hyderabad', companysize:1000},
+                //     {id:2, name:'Zeno', address:'kokapet, hyd', companysize:7899},
+                //     {id:3, name:'Zeta', address:'Begumpet, hyd', companysize:12344}
+                // ]
+                
+                // function CompanyList(props){
+                //     function CompanyBtn(company){
+                //         alert(`${company.id} - ${company.name} - ${company.address} - ${company.companysize}`)
+                //     }
+                //         return (
+                //             <ul>
+                //                 {props.companies.map((company)=>{
+                //                 return ( <li 
+                //                             key={company.id}>{company.name}
+                //                                 <button 
+                //                                     onClick={()=>CompanyBtn(company)}>Show details of {company.name}
+                //                                 </button>
+                //                         </li>)
+                //                     }
+                //                 )}
+                //             </ul>
+                //     )
+                // }
+
+                // const element=<CompanyList companies={companies}/>
+
+                //=====================Passing data from child to parent using call back function
+                
+                function Father(prop){
+                    const title='Chandler'
+                    function acknowledgeFather(name){
+                        alert(`${name} - has acknowledged Father`)
+                    }
+                    return(
+                        <div>
+                            <h1>Component Father</h1>
+                            <Son name={title} func={acknowledgeFather}/>
+                        </div>
+                    )
+                }
+            
+
+                function Son(prop){
+                    return(
+                        <div>
+                        <h2>Component Son - {prop.name}</h2>
+                        <button onClick={()=>{
+                            prop.func(prop.name)
+                        }}>Acknowledge</button>
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<Father/>, rootHandle)
+              //ReactDOM.render(element, rootHandle)//render
+        </script>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Conditional rendering : Inline-if
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                
+                //syntax of Conditional Rendering
+                //whtr to show the below links to user1? using conditional rend..
+                function StudentLinks(props){ //child component
+                    return( //use {} inside JSX to embed JS
+                        <div>
+                            <a href="Students/Show/1">Show</a><br/>
+                            {//in-line condition so use logical oper(&&). if its admin then only show Delete
+                                props.user.role === 'Admin' &&  <a href="Students/Delete/1">Delete</a>//after && we can either show componet or react element
+                            }
+                        </div>//user1's role is student=admin is false so user1 cant see the Delete link.
+                    )
+                }
+
+                //App component i.e function App. inside this app comp, we are rendering StudentLinks component
+                function App(props){//parent component
+                    const user={
+                        id:1,
+                        name:'user1',
+                        role:'Student' //if role:Admin then link will be displayed.
+                    }
+                    return (
+                        <div>
+                            <h2>Student Management System</h2>
+                            <StudentLinks user={user}/>
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<App/>, rootHandle)
+        </script>
+    </body>
+</html>

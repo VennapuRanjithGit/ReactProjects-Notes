@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                
+                function Parent(props){
+                const names=['Ross','Rachel','Chandler','Monika','Joey','Pheobe']
+                
+                function getHugs(name){
+                    alert(`${name} has hugged Parent`)
+                }
+                return(//embedd map method below within jsx; map takes a call back function; each name in above array passed below as an argument and "i" is index below; return multiple child elements and value of key is index
+                    <div>
+                        <h1>Parent Component</h1>
+                        {names.map((ele, i)=>{
+                            return <Child key={i} name={ele} func={getHugs}/>
+                        })}
+                    </div>
+                )
+                }
+
+                function Child(props){ //data being passed to parent to child and child can notify to parent via call back func
+                    return(
+                        <div>
+                            <h2>Child component - {props.name}</h2>
+                            <button onClick={()=>{
+                                props.func(props.name)
+                            }}>Get Hug</button><hr/>
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<Parent/>, rootHandle)
+        </script>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+        <script>
+            const url1='https://jsonplaceholder.typicode.com/users'
+            const url2='https://jsonplaceholder.typicode.com/posts'
+
+            // Promise.all([axios.get(url1), axios.get(url2)])
+            //     .then((values)=>{
+            //         const [userResponse, postResponse] = values
+            //         console.log('users', userResponse.data)
+            //         console.log('posts', userResponse.data)
+            //     })
+
+
+            Promise.race([axios.get(url1), axios.get(url2)]) //even when one of the promise resolves then .reace get called.
+                .then((value)=>{
+                    console.log(value.data)
+                })
+        </script>
+    </body>
+</html>

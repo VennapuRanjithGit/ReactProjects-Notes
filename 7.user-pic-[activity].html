@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            User-pic
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                const user={
+                    first_name:'WinWireLogo',
+                    email:'w777@gmail.com',
+                    avatar:'https://www.winwire.com/wp-content/themes/winwirewp-theme/assets/images/logos/logo.png'
+                }
+
+                //display user pic on webpage, use users first name for the alt attribute
+                const element=<img src ={user.avatar} alt={user.first_name}/>  //img tag is self closing tag 
+                ReactDOM.render(element, rootHandle)
+        </script>
+    </body>
+</html>

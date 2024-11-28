@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Enquiry Form with form errors handling
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.12.0/validator.min.js"></script> <!--go to https://cdnjs.com/libraries/validator and copy this link paste here in script so that we can use email validator below.-->
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                const {useState} = React 
+
+                function EnquiryForm(props){
+                    const [name, setName] = useState('')
+                    const [email, setEmail] = useState('')
+                    const [message, setMessage] = useState('')
+                    const [profession, setProfession] = useState('')
+                    const status=['working','non-working']
+                    const [genderType, setGenderType] = useState('')
+                    const [agreementOpt, setAgreementOpt] = useState(false)
+                    const [showMessage, setShowMessage] = useState(false)
+                    const [formErrors, setFormErrors] = useState({}) //create frmerrors state and use empty usestate obj. used to display if any input field is to be entered by user after click on submit
+                    const errors={} //formErrors is a state variable whereas this errors is a local variable
+                    
+                    //=======================
+                    //all the below funct does same work so it is repetitive hence use one callback fun for multiple inputs like below.
+                   /*const handleNameChange=(e)=>{
+                        // const nameInput = e.target.value 
+                        // setName(nameInput) 
+                        //or use directly
+
+                        setName(e.target.value)
+                    }
+
+                    const handleEmailChange=(e)=>{
+                        //const emailInput=e.target.value
+                        setEmail(e.target.value)
+                    }
+
+                    const handleMessageChange=(e)=>{
+                        //const messageInput=e.target.value 
+                        setMessage(e.target.value)
+
+                    }
+
+                    const handleProfessionChnage=(e)=>{
+                        //const professionInput=e.target.value 
+                        setProfession(e.target.value )
+                    }
+
+                    const handleGenderTypeChange=(e)=>{
+                        //const genderTypeInput= e.target.value 
+                        setGenderType(e.target.value)
+                    } */
+
+                    //one call back fun for multiple input fields
+                    const handleChange=(e)=>{//thus only one event handler which is organized way and customized code.
+                        const attr=e.target.name 
+                        if(attr==='name'){
+                            setName(e.target.value)
+                        }else if(attr==='email'){
+                            setEmail(e.target.value)
+                        }else if(attr==='message'){
+                            setMessage(e.target.value)
+                        }else if(attr==='genderType'){
+                            setGenderType(e.target.value)
+                        }else if(attr==='profession'){
+                            setProfession(e.target.value)
+                        }
+                    }
+                    //=============
+                    const handleAgreementChange=(e)=>{
+                        //const agreementInput=e.target.checked //target.checked is mandat for check and uncheck the checkbox.
+                        setAgreementOpt(e.target.checked)
+                    }
+
+                    const handleShowMessage=()=>{ //no need of 'e'(event obj) as we are not reading anything from Event object
+                        setShowMessage(true)
+                    }
+
+                    const handleMessageDisapper=()=>{
+                        setShowMessage(false)
+                    }
+
+                    //to run validation function/invoke fun i.e will run valid for name and email.
+                    const runValidations=()=>{
+                        //name
+                        if(name.trim().length===0){//trim any empty spaces and check length is 0 i.e nothing entered in text box then use local variables errors to show name cant be blank
+                            errors.name='name cannot be blank'
+                        }
+                        //email
+                        if(email.trim().length===0){ //same
+                            errors.email='email cant be blank'
+                        }else if(!validator.isEmail(email)){ //if email formate is correct return true else false. this validator is prop of above link that we got from https://cdnjs.com/libraries/validator
+                            errors.email='invalid email formate'
+                        }
+                    }
+
+                    const handleSubmit=(e)=>{
+                        e.preventDefault()
+                        runValidations() //create a fun and invoke above
+                        //alert(`${name} - ${email} - ${message} - ${profession} - ${genderType}`) //if you want to alert 
+                        //console.log({name:name, email:email, message:message, profession:profession, genderType:genderType}) //isnt a standard approach instead follow below
+                        
+                        //determining whtr obj is empty or not by passing local variable errors and checking length is 0 or not
+                        if(Object.keys(errors).length===0){//if errors obj is empty then no errors in form. We can fallback on object.keys
+                            setFormErrors({})//no errors in our object
+                            const formData={//in general this data sent to server for inspection
+                            name: name,
+                            email:email,
+                            message:message,
+                            profession:profession,
+                            genderType:genderType,
+                            agreementOpt:agreementOpt
+                        }
+                        console.log('formData', formData)
+                        //to reset the form after click on submit. use setState variable with empty string
+                        setName('')
+                        setEmail('')
+                        setGenderType('')
+                        setMessage('')
+                        setProfession('')
+                        setAgreementOpt('')
+
+                        }else{//if isnt then there is errors in form
+                            setFormErrors(errors)
+                        }
+                    }
+
+                    return(//below form has change event(i.e onChange) and submit event(i.e onSubmit)
+                        <form onSubmit={handleSubmit}>
+                            <h1>Enquiry Form</h1>
+
+                            <label>Name</label> <br/>
+                            <input type='text' value={name} onChange={handleChange} name='name'/>
+                            {formErrors.name && <span>{formErrors.name}</span>}
+                            <br/><br/>
+
+                            <label>Email</label><br/>
+                            <input type='text' value={email} onChange={handleChange} name='email'/>
+                            {formErrors.email && <span>{formErrors.email}</span>}
+
+                            <br/><br/>
+
+                            <label>Message</label><br/>
+                            <textarea value={message} onChange={handleChange} name='message' onFocus={handleShowMessage} 
+                            onBlur={handleMessageDisapper}></textarea> {/*this is about other events(onFocus, onBlur etc) while working with input fields*/}
+                            {showMessage &&<span>Please enter your Educational background info too.</span>} 
+                            <br/><br/>
+                            
+                            <label>Profession</label><br/>
+                            <select value={profession} onChange={handleChange} name='profession'>
+                                <option value=''>status</option>
+                                    {status.map((ele,i)=>{
+                                        return <option key={i}>{ele}</option>
+                                    })}
+                            </select><br/><br/>
+
+                            <label>Gender</label><br/>{/*checked form is optional as this is a form and no editing option is there.*/}
+                            <input type='radio' name='genderType' value='male' checked={genderType==='male'} 
+                            onChange={handleChange}/>Male
+                            <input type='radio' name='genderType' value='female' checked={genderType==='female'}
+                            onChange={handleChange}/>Female <br/><br/>
+
+                            <input type='checkbox' checked={agreementOpt} onChange={handleAgreementChange}/>
+                            <label>I Agree to Terms & Conditions</label><br/><br/>
+
+                            <input type='submit' value='Submit Enquiry' disabled={!agreementOpt}/>{/* by default disabled will be false for all input fields. by using that will make not of agreementOpt so this button enables only wn user check the T&C checkbox. */}
+                        </form>
+                    )
+                }
+
+                ReactDOM.render(<EnquiryForm/>, rootHandle)
+        </script>
+    </body>
+</html>

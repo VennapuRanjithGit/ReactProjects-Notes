@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Updating State by passing args
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                const {useState} = React
+
+                function FriendList(props){
+                    const [names, setNames] = useState(['joey','ross','chandler'])
+
+                    const removeItem=(name)=>{
+                        //copy of the values of array into new variable
+                      //copying names array data into newNames-variable
+                      //we cant direcly update state values
+                        //we can deep copy by 1. array concat method, 2. splice method and 3. es6 spread operator 
+                        const newNames= [...names] //spread opr
+                        const index= newNames.indexOf(name) //finding the index where the particular name is present
+                        newNames.splice(index,1)//indicating how many names to be deleted here it is 1 i.e from the given index remove '1' item
+                        setNames(newNames)//state names updated to this newNames
+                    }
+
+                    return(//lenght of array; mapping over names array with index as "i", key is 'i'.
+                        <div>
+                            <h1>Listing friends - {names.length}</h1> 
+                            {names.map((ele,i)=>{
+                                return <li key={i}>{ele} 
+                                    <button onClick={()=>{//inline function to pass. ; ele above is names of the function which will be referred as 'name' above; can kepp ele aslso.
+                                        removeItem(ele)
+                                    }}>Remove</button>
+                                    </li>
+                            })}
+                        </div>
+                    )
+                }
+                ReactDOM.render(<FriendList/>,rootHandle)
+        </script>
+    </body>
+</html>

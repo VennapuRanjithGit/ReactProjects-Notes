@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                const {useState, useEffect} = React 
+
+                function BookTickets(prop){
+                    const [tickets, setTickets] = useState(0)
+
+                    useEffect(()=>{
+                        document.title=`you have booked ${tickets} tickets` //this cause side effect i.e every time your render this page title along with ticket count will be changed.
+                    })
+                    const increment=()=>{
+                        setTickets(tickets+1)
+                    }
+
+                    return(
+                        <div>
+                            <h1>You have booked '{tickets}' ticket/s.</h1>
+                            <button onClick={increment}>+1</button>
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<BookTickets/>, rootHandle)
+        </script>
+    </body>
+</html>

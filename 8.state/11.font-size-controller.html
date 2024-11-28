@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                const {useState} = React 
+
+                function FontSizeController(props){
+                    const [font, setFont] = useState(50)
+                    const h1style={fontSize: font+'px', display: 'inline'}
+
+                    const incrFont=()=>{
+                        setFont(font+5)
+                    }
+
+                    const decrFont=()=>{
+                        // if(font>20){
+                        // setFont(font-5)
+                        // }
+                        // else{
+                        //     alert('font size should not be below 20px')
+                        // }
+
+                        const result = font-5 
+                        if(!(result<20)){
+                            setFont(font-5)
+                        }
+                        else{
+                            alert('font size should not be below 20px')
+                        }
+                    }
+
+                    return(
+                        <div>
+                            <button onClick={decrFont}>-</button>
+                            <h1 style={h1style}> Dct Academy </h1>
+                            <button onClick={incrFont}>+</button>
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<FontSizeController/>,rootHandle)
+        </script>
+    </body>
+</html>

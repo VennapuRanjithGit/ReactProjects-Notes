@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            component loop - array object 
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                const usersInfo=[
+                    {"id":1,"email":"user1@gmail.com", "first_name":"user1","pic":"https://www.winwire.com/wp-content/themes/winwirewp-theme/assets/images/logos/logo.png"},
+                    {"id":2,"email":"user2@gmail.com","first_name":"user2","pic":"https://www.winwire.com/wp-content/themes/winwirewp-theme/assets/images/logos/logo.png"},
+                    {"id":3,"email":"user3@gmail.com","first_name":"user3","pic":"https://www.winwire.com/wp-content/themes/winwirewp-theme/assets/images/logos/logo.png"}
+                ]
+
+                function Users(props){
+                    return (
+                        <div>
+                            <img src={props.pic}/>
+                            <h1>{props.first_name}</h1>
+                            <p>{props.email}</p>
+                            
+                            <hr/>
+                        </div>
+                    )
+                }
+
+                //multiple user info so wrap it inside div
+                //here users is array so, will ue map i.e will map over it and each element inside array obj is passed as arg ie. eg 'e' inside map.
+                //then using call back function(=>), 
+                //and will return above component function(Users) i.e each of the Users component inside it
+                //i.e looping over entire array and generating multiple Users function components
+                //wthr you looping over array and return a li tag or a component, you should specify 'key' if not error persists
+                //i.e like every user has unique id for identity purpose
+                const ele=(
+                    <div>
+                        {usersInfo.map((e)=>{
+                            return (//dont ever forget to wrap everything that returns inside a round bracket
+                             <Users 
+                                        key={e.id} 
+                                        pic={e.pic} 
+                                        email={e.email} 
+                                        first_name={e.first_name} 
+                                    />
+                            )
+                        })}
+                    </div>
+                )
+
+                ReactDOM.render(ele, rootHandle)
+        </script>
+    </body>
+</html>

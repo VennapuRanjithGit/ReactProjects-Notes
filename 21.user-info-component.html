@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+                UserInfoComponent
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                const userdet={
+                    firstName:'Rishab',
+                    email:'R@gmail.com',
+                    pic:'https://www.winwire.com/wp-content/themes/winwirewp-theme/assets/images/logos/logo.png'
+                }
+
+                function UserInfo(props){
+                    return (
+                            <div>
+                                <img src={props.pic} />
+                                <h3>{props.email}</h3>
+                            </div>
+                        )
+                }
+
+                const ele=<UserInfo email={userdet.email} pic={userdet.pic}/>
+                ReactDOM.render(ele, rootHandle)
+        </script>
+    </body>
+</html>

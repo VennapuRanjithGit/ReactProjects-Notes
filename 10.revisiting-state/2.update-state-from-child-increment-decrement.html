@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+                Increment and Decrement functionality
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                const {useState} = React 
+                
+                function PriceDetails(props){
+                    const {totalItems, totalCartPrice} = props
+                    const deliveryCharge = 50
+
+                    return(
+                        <div>
+                            <h3>Price Details</h3>
+                            <b>Total ({totalItems}) items price - {totalCartPrice}rs </b><br/>
+                            <b>Delivery charge - {deliveryCharge}rs</b><br/>
+                            <b>Total Price - {totalCartPrice + deliveryCharge}rs</b>
+                        </div>
+                    )
+                }
+            
+                function CartItem(props){
+                    const {id, name, price, quantity, removeItem, incQuantity, decQuantity} = props
+
+                    return(
+                        <div>
+                            <b>{name}</b>
+                            <p>INR {price}</p>
+                            <button onClick={()=>{
+                                incQuantity(id) //id here is - while looping through products in MyCart comp each item has an id - we are utilizing that id here
+                            }}> + </button> {quantity} <button onClick={()=>{
+                                decQuantity(id)
+                            }}disabled={quantity===1}> - </button>
+                            <button onClick={()=>{ //using inline arrow funtion as we need to pass args to function
+                                removeItem(id) //this id comes from above prop. whn u click on remove then the respective id will be show in that i
+                            }}> Remove </button>
+                            <hr/>
+                        </div>
+                    )
+                }
+
+                function MyCart(props){//array of objects so - map over each item in it
+                    
+                    const [products, setProducts] = useState([
+                        {id:1, name:'Titanium', price:2, quantity:1},
+                        {id:2, name:'Uranium', price:5, quantity:2}
+                    ])
+
+                    const removeItem=(id)=>{ //any function which is responsible for any state operation or any opr on state values then it needs to be written/declared inside the same component like this removeItem function as it performs removing opr on products which is a state inside this compo so.
+                                    //pass this function as a prop to the cartItem component i.e below
+                            const result = products.filter((ele)=>{ //filter method is used to remove an item // ele is the above array of objects.
+                                return ele.id!=id //except the id we clicked other will be returned thus id we clicked will get removed.
+                            }) //left id comes from array of obj and right id is the one which we click to remove.
+                             
+                           setProducts(result)
+                        }
+                    
+                        //call-back function
+                    const calcSum=()=>{
+                        let sum=0
+                        products.forEach((prods)=>{
+                            sum = sum + prods.price * prods.quantity
+                        })
+                            return sum
+                    }
+                    
+                    //call-back function- declare here inside Mycart as state resides here.
+                    const incQuantity=(id)=>{  //while invoking we are passing id as an argument. next pass this func as prop below in cartItem
+                       //we use arrayMap method to update any value in function
+                       const result=products.map((ele)=>{//will get access to all elements/items in products; can give any name ele/prod/p etc.
+                            if(ele.id==id){//if id in elements/items of products matches the id which we were passing(which cart item that we are clicking to increment)
+                                return {...ele, ...{quantity: ele.quantity+1}} //spread the ele obj and create a new obj which only contains quantity and inc to 1; this is new object with updated quantity.
+                            }else{
+                                return {...ele}//else return the same existing object
+                            }
+                       })   
+                       setProducts(result) //update the result along with the new quatity
+                    }
+
+                    const decQuantity=(id)=>{
+                        const result=products.map((ele)=>{
+                            if(ele.id==id){
+                                return {...ele, ...{quantity: ele.quantity-1}}
+                            }else{
+                                return {...ele}
+                            }
+                        })
+                        setProducts(result)
+                    }
+
+                    return(
+                        <div>
+                            <h2>My Cart - ({products.length})</h2>
+                            {products.map((prods)=>{
+                                return <CartItem key={prods.id} name={prods.name} {...prods} 
+                                            removeItem={removeItem}//removeItem is prop and removeItem to right is function; now use this prop above 
+                                            incQuantity={incQuantity}
+                                            decQuantity={decQuantity}/> 
+                            })}
+
+                            <PriceDetails totalItems={products.length}
+                                            totalCartPrice={calcSum()}/>
+                        </div>
+                    )
+                }
+
+                function App(props){
+                    return(
+                        <div>
+                            <h1>Cart Page</h1>
+                            <MyCart/>
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<App/>, rootHandle)
+        </script>
+    </body>
+</html>

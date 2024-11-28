@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Reversing a string
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                const {useState} = React 
+
+          
+                function ReverseString(props){
+                    const [strings, setString] = useState('dct academy')
+
+                    const reverseString=()=>{
+                    //===========1.for loop approach
+                    // let result=''
+                    // for(let i=strings.length-1;i>=0; i--){
+                    //             result = result+strings[i]
+                    //         }
+                    //         setString(result)
+                    //     }
+
+                    //===========2.using method
+                    const result=strings.split('').reverse().join('')
+                    setString(result)
+                    }
+
+                    return(
+                        <div>
+                            <h1>{strings}</h1>
+                            <button onClick={reverseString}>Reverse</button>
+                       
+                        </div>
+                    )}
+                
+                ReactDOM.render(<ReverseString/>,rootHandle)
+        </script>
+    </body>
+</html>

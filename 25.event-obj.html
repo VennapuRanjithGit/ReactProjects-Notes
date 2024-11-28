@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+                Event Object
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                function GreetMe(props){
+                    function handleClick(e){//event obj creation i.e 'e' which is internally there in react.
+                    console.log('we prevented going to new page', e)
+                        e.preventDefault() // to prevent default mechanism of element i.e here it prevents onclick redirecting to respected 
+                    }
+                        return (
+                    <a href={props.url} onClick={handleClick}>{props.name}</a>
+                    )
+                }
+
+                const ele=<GreetMe name="Google" url="https://www.google.com" />
+
+                ReactDOM.render(ele, rootHandle)
+        </script>
+    </body>
+</html>

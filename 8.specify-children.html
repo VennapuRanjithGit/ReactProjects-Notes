@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+                specify-children
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                //const element=(<h1>Hello</h1>) //React element alwasy render only single tag inside it.
+
+                //div(for grouping elements) is used inside react element like belwo: to render multiple elements/tags 
+                const element=(
+                    <div>
+                    <div>
+                        <h1>Can JSX element can have children like div tag, inside it?</h1>
+                        <p>Ans:  Yes</p>
+                    </div>
+                    <div>
+                        </div>
+                    </div>
+                )//if multiple div to be used then wrap it in parent div i.e like above
+                
+
+                ReactDOM.render(element,rootHandle)
+        </script>
+    </body>
+</html>

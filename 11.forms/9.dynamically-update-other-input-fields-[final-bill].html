@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Final bill
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                const {useState} = React 
+
+                function FinalBill(props){
+                    const [amount, setAmount] = useState(0)
+                    const [finalAmount, setFinalAmount] = useState(0)
+
+                    const handleAmountChange=(e)=>{
+                        const amountInput = e.target.value //read the amount entered by user
+                        //console(typeof amountInput) //any value that come thru input field is always string. even though we given number it accepts as string only, but below we mentioned number as to ensure user not to enter other than nnumbers
+                        setAmount(amountInput) //sotre it to setAmount
+                        const finalAmount= (Number(amountInput) +  (amountInput*18)/100).toFixed(2) //18% GST. store it in finalAmount as we need final amnt to be calc here.
+                        setFinalAmount(finalAmount)//should use Number() to get exact calculation //.toFixed(2) is to fix 2 digits after the decima
+                    }
+
+                    return(
+                        <div>
+                         
+                        <form>
+                                <label>Amount: </label><br/>
+                                <input type='number' value={amount} onChange={handleAmountChange}/><br/>
+
+                                <label>Final amount: </label><br/>
+                                <input type='number' value={finalAmount} disabled={true}/> 
+                        </form>
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<FinalBill/>, rootHandle)
+        </script>
+    </body>
+</html>

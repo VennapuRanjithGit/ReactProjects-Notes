@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            User list through map loop inside JSX
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                //declaring array Object
+                const user=[
+                    {id:1, name:'user1'},
+                    {id:2, name:'user2'},
+                    {id:3, name:'user3'},
+                    {id:4, name:'user4'}
+                ]
+
+                //We need to show h2 and ul(unordered list) i.e multiple tags so we define them in div container as jsx element cant have multiple tags
+                const element=(
+                    <div>
+                        <h2>Listing users - {user.length}</h2>
+                        <ul>
+                            {user.map((ele)=>{
+                                return <li>{ele.name}</li> //as we need to print the name use ele.name {ele is just a parameter, so it can be any text}
+                            })}
+                        </ul>
+                    </div>
+                )
+                ReactDOM.render(element,rootHandle)
+        </script>
+    </body>
+</html>

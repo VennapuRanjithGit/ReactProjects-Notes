@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                
+                // function LoginTrue(props){
+                //     const LoginIcn={icon:'https://i.ibb.co/cNfHy3b/green-dot.png'}
+                //     return(
+                //         <img src={LoginIcn.icon}/>
+                //     )
+                // }
+
+                // function LoginFalse(props){
+                //     const LogoutIcn={icon:'https://i.ibb.co/jhPVt09/red-dot.png'}
+                //     return(
+                //         <img src={LogoutIcn.icon}/>
+                //     )
+                // }
+
+                // function UserStatus(props){
+                //     const {userList}=props
+                   
+                //     return(
+                //         <div >
+                //             {userList.map((userLst)=>(
+                //                 <div key={userLst.id}>
+                //                     {(userLst.isLoggedIn) ? (<h2><LoginTrue/> {userLst.name} </h2>) : (<h2><LoginFalse/> {userLst.name}</h2>)}
+                //                 </div>
+                //             ))}
+                //         </div>
+                //     )
+                // }
+
+                // function App(props){
+                //     const userList=[
+                //         {id:1, name:'Adam', isLoggedIn:false},
+                //         {id:2, name:'Steve', isLoggedIn:true},
+                //         {id:3, name:'Dona', isLoggedIn:true},
+                //         {id:4, name:'Kumar', isLoggedIn:false}
+                //     ]
+
+                //     return(
+                //         <div>
+                //             <h1>User Login Status</h1>
+                //             <UserStatus userList={userList}/>
+                //         </div>
+                //     )
+                // }
+
+                //======================Standard code below
+                function LoginTrue(props){
+                    return <img src='https://i.ibb.co/cNfHy3b/green-dot.png' alt='green dot'/>
+                }
+
+                function LoginFalse(props){
+                    return <img src='https://i.ibb.co/jhPVt09/red-dot.png' alst='red dot'/>
+
+                }
+
+                function UserStatus(props){
+                    const {name, isLoggedIn}=props
+                    return(
+                        <div>
+                            <h2>{isLoggedIn ? <LoginTrue/> : <LoginFalse/>} {name}</h2>
+                        </div>
+                    )
+                }
+
+                function App(props){
+                    const userList=[
+                        {id:1, name:'Adam', isLoggedIn:false},
+                        {id:2, name:'Steve', isLoggedIn:true},
+                        {id:3, name:'Dona', isLoggedIn:true},
+                        {id:4, name:'Kumar', isLoggedIn:false}
+                    ]
+
+                    return(
+                        <div>
+                            <h1>User Login Status</h1>
+                            {userList.map((userLst)=>{
+                                return <UserStatus key={userLst.id} name={userLst.name} isLoggedIn={userLst.isLoggedIn}/>
+                            })}
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<App/>, rootHandle)
+        </script>
+    </body>
+</html>

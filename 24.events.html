@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Events
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                //--- Simple Event Handler
+                // //callback function
+                // function alertMe(){ 
+                //     alert('You clicked it')
+                // }
+                // const ele=<button onClick={alertMe}>Click me!!</button> //creation of button; on clicking it calls the above function.
+
+                //============Event handler with Components- wn component is cicked a alert will be thrown
+                function GreetUser(props){ //functional component always returns react elements
+
+                    function alertMe(){//call back function
+                        alert('Hey ' + props.name+ 'You clicked it') //within event handler we can access props
+                    }
+                    return ( //listening for the events here i.e onClick attribute
+                        <button onClick={alertMe}>Click me</button> 
+                    )
+                }
+
+                const ele=<GreetUser name="Rohan"/> //here prop value is 'rohan', will use it to alert the user(GreetUser)
+                ReactDOM.render(ele, rootHandle)
+        </script>
+    </body>
+</html>

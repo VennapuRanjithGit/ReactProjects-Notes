@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                const {useState} = React 
+
+                function UserLaptop(props){
+                    const [username, setUsername] = useState('')
+                    const [laptop, setLaptop] = useState('')
+                    const [isSubmitted, setIsSubmitted] = useState(false) //here we change/update the isSubmitted value so used state
+                    const brand = ['Dell', 'Hp', 'Thoshiba', 'Honor', 'Realme'] //array of information //if u want to change/update the value put them in a state if not sotre this way 
+
+                    const handleUsername=(e)=>{
+                        const userInput=e.target.value 
+                        setUsername(userInput)
+                    }
+
+                    const handleLaptop=(e)=>{
+                        const laptoInput = e.target.value 
+                        setLaptop(laptoInput)
+                    }
+
+                    const handleSubmit=(e)=>{
+                        e.preventDefault()
+                        setIsSubmitted(!isSubmitted) //toggle
+                        //(`${username} selected ${laptop}`)  //Need not to use this alert instead we can display it on UI using h1 tag below
+                    }
+
+                    return(//after the submission only display the laptop selected by user in heading not before. so, create a new use state isSubmitted with initial value is false. then toggle it
+                        <div>
+                            {isSubmitted &&  <h1>{laptop}</h1> }
+                            <form onSubmit={handleSubmit}>
+                                <label>Username: </label><br/>
+                                <input type='text' value={username} onChange={handleUsername}/><br/>
+
+                                <label>Laptop: </label><br/>
+                                 <select value={laptop} onChange={handleLaptop}>
+                                    {/*This way of dropdown is hardcoded which isnt a standard way wn there are many dropdown values, so store those dropdown values in array and assing a variable i.e above brand
+                                    <option value='Dell'>Dell</option>
+                                    <option value='Lenevo'>Lenevo</option>
+                                    <option value='Acer'>Acer</option>
+                                    <option value='Honor'>Honor</option>
+                                    <option value='Thosiba'>Thoshiba</option>*/}
+                                <option value=''>Select a brand</option> {/*this is static so not commenting*/}
+                                {/*will use jsx i.e {} as we need to map/loop over each item in array brand and
+                                    brand is array of info so will map over brand then ele is each item or option in brand/array. as its a string nd there are no unique values we use id as unique value
+                                    then return the option with value ele and should mention key i.e id and print ele i.e each item in array.
+                                    now this is the standard and practical way to use dropdown i.e DYNAMICT DROPDOWN LIST*/}
+                                {brand.map((ele, id)=>{
+                                    return <option value={ele} key={id}>{ele}</option>
+                                })}
+                            </select><br/>
+
+                                <input type='submit' value='Save User preferences'/>
+                            </form>
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<UserLaptop/>, rootHandle)
+        </script>
+    </body>
+</html>

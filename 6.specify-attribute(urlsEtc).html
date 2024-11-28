@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Specify - Attribute
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                const websitedetails={
+                    websiteName:'WinWire',
+                    URL:'http://www.winwire.com'
+                }
+                //---------------On click - to render url info/website on same page or tab
+                //const result= <a href={websitedetails.URL}>{websitedetails.websiteName}</a>
+
+                //---------------On click - to render url info/website on to separate page or tab
+                const result= <a href={websitedetails.URL} target="_blank">{websitedetails.websiteName}</a>
+
+                ReactDOM.render(result,rootHandle)
+        </script>
+    </body>
+</html>

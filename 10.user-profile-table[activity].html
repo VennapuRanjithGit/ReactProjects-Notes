@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            User profile - table
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                const user={
+                    first_name:'WinWireLogo',
+                    email:'w777@gmail.com',
+                    avatar:'https://www.winwire.com/wp-content/themes/winwirewp-theme/assets/images/logos/logo.png'
+                }
+
+                //pic | name | emial
+
+                const userProfiletTable=(
+                    <div>
+                        <table border="1">
+                            <thead>
+                                <tr>
+                                    <th>Pic</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src={user.avatar}/></td>
+                                    <td>{user.first_name}</td>
+                                    <td>{user.email}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                )
+
+                ReactDOM.render(userProfiletTable, rootHandle)
+        </script>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+                how to add an element into an array which is maintained inside a state.
+                maintaing state as an array.
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                //importing react hooks specifically useState hook from react library
+                const {useState} = React
+                
+                function RandomNumbers(props){//1. creating a componet i.e parent function/comp called RandomNumbers
+                    
+                    //2. maintain state variable called numbers
+                    //2. dirctly use the above useState hook to declare the below state i.e numbers .e 
+                    const [numbers, setNumbers] = useState([]) //numbers - state variable, setNumbers - updating the state variable numbers; //initally let the array be empty as we donno or dont have any numbers in it instead we need to generate it.
+                    
+                    //callback function //note: we can still update state value inside callback function
+                    const generateRandomNumber=()=>{ //these call back func are pure functions i.e v shoudl not udpdate value of state directly inside callback function i.e pure function 
+                        //we should do deep copy of array - by either of slice(0), concat, spread opr
+                        //================using slice method
+                        const newNumbers =numbers.slice(0) //slice(0) is from 0th index to nth index
+                        const randomNumber=Math.round(Math.random()*100) //generating a random number
+                        newNumbers.push(randomNumber)//push method returns 'new lenght of an array' //now push the randmNmbr generated above into the numbers array
+                        setNumbers(newNumbers)//Now call the setnumber function above and pass the new numbers
+                        
+                        //=================using concat approach
+                        // const randomNumber=Math.round(Math.random()*100)
+                        // const newNumbers=numbers.concat(randomNumber) 
+                        // setNumbers(newNumbers)
+
+                        //================using spreadOpr approach
+                        // const randomNumber=Math.round(Math.random()*100)
+                        // const newNumbers=[...numbers, randomNumber]
+                        // setNumbers(newNumbers)
+                    }
+
+                    return(//3.display the count of the numbers //4. dispaly a button on the screen called as 'Add'; //insteady of writing logic instead inside below jsx create a function 'generateRadnmNumb' above then give its reference in below event handler which is a good practice.
+                        <div>
+                            <h1>Total Count of the Numbers - {numbers.length}</h1>
+                            <button onClick={generateRandomNumber}>Add</button>
+                        </div>
+                    )
+                }
+
+                //displaying RandomNumbers on screen
+                ReactDOM.render(<RandomNumbers/>, rootHandle)   
+        </script>
+    </body>
+</html>

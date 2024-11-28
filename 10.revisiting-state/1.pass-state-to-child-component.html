@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                const {useState} = React 
+                
+                function PriceDetails(props){
+                    const {totalItems, totalCartPrice} = props
+                    const deliveryCharge = 50
+
+                    return(
+                        <div>
+                            <h3>Price Details</h3>
+                            <b>Total ({totalItems}) items price - {totalCartPrice}rs </b><br/>
+                            <b>Delivery charge - {deliveryCharge}rs</b><br/>
+                            <b>Total Price - {totalCartPrice + deliveryCharge}rs</b>
+                        </div>
+                    )
+                }
+
+            
+                function CartItem(props){
+                    const {id, name, price, quantity} = props
+                    return(
+                        <div>
+                            <b>{name}</b>
+                            <p>INR {price}</p>
+                            <button> + </button> {quantity} <button> - </button>
+                            <button> Remove </button>
+                            <hr/>
+                        </div>
+                    )
+                }
+
+                function MyCart(props){//array of objects so - map over each item in it
+                    
+                    const [products, setProducts] = useState([
+                        {id:1, name:'Titanium', price:2, quantity:1},
+                        {id:2, name:'Uranium', price:5, quantity:2}
+                    ])
+                    
+                    const calcSum=()=>{
+                        let sum=0
+                        products.forEach((prods)=>{
+                            sum = sum + prods.price * prods.quantity
+                        })
+                            return sum
+                    }
+
+                    return(
+                        <div>
+                            <h2>My Cart - ({products.length})</h2>
+                            {products.map((prods)=>{
+                                return <CartItem key={prods.id} name={prods.name} {...prods}/>
+                            })}
+
+                            <PriceDetails totalItems={products.length}
+                                            totalCartPrice={calcSum()}/>
+                        </div>
+                    )
+                    
+                }
+
+                function App(props){
+                    return(
+                        <div>
+                            <h1>Cart Page</h1>
+                            <MyCart/>
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<App/>, rootHandle)
+        </script>
+    </body>
+</html>

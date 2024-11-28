@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                function PaymentInfo(props){
+                    const {isDue}=props
+                    if(!isDue){//use this if you dont want to render any o/p from a component. such that we can prevent a component from rendering
+                        return null
+                    }
+                    return(
+                        <h2>Payment Info..... Please pay your Due ASAP..</h2>
+                    )
+                }
+
+                function App(props){
+                    const isDue=true
+                    return (
+                        <PaymentInfo isDue={isDue}/>
+                     )
+                }
+                ReactDOM.render(<App/>, rootHandle)
+        </script>
+    </body>
+</html>

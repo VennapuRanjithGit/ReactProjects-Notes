@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                const {useState} = React 
+
+                function ShowOrHide(props){
+                    const [status, setStatus] = useState(true) //1. let status value be 'true' initially
+                    
+                    //call back function is sufficient . no need of inline event handler
+                    const toggle=()=>{
+                        //const result = status ? false : true  //using terinary operator or use below
+                        const result= !status //using not operator; not of true is false and viceversa.
+                        setStatus(result) //passing result as an arg to setStatus func.
+                    }
+
+                    return (//using conditional rendering i.e inline 'if-else' condition implemented by terinary operator. we can maintain two texts in a single button as below. i.e if status true then show 'hide' else show 'show'
+                       //if the status is true then paragraph to be shown so - use inline if using logical & operator i.e below "status && means if status is true"
+                        <div>
+                            <h1>Click below button to Show or Hide the text</h1>
+                            {status && <p>React is a front end javascript library. 
+                            Functional components | Redux | Paent components | Child components</p>}
+                            <button onClick={toggle}>{status ? 'Hide' : 'Show'}</button>
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<ShowOrHide/>, rootHandle)
+        </script>
+    </body>
+</html>

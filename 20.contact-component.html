@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Contact component
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                const myinfo={
+                    name:'Cena',
+                    email:'cena@gmail.com',
+                    address:'hyd',
+                    website:'CenaTechWorld.com'
+                }
+
+                function Contact(props){ //Component also can only return 1 element. if we multiple to be returned use div tag
+                    console.log(props) // just to check props information. write it before return only
+                    return (//below, holding the props
+                                <div>
+                                    <h2>{props.name}</h2> 
+                                    <p>{props.email}</p>
+                                    <p>{props.website}</p>
+                                </div>
+                            )
+                }
+                const ele=<Contact name={myinfo.name} email={myinfo.email} website={myinfo.website}/> //passing props to the above component
+                ReactDOM.render(ele, rootHandle)
+        </script>
+    </body>
+</html>

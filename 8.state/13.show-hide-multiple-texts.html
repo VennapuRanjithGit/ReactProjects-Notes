@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            show or hide multiple articles or texts.
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                const {useState} = React 
+
+                //===============this code gives you same output but repitive renderings or calling the components involved so not preferable.
+                // function ShowOrHideMultipleTexts(props){
+                //     const [status, setStatus] = useState(true)
+                //     const [status1, setStatus1] = useState(true)
+
+                //     const [status2, setStatus2] = useState(true)
+
+
+                //     const toggleReact=()=>{
+                //         const result= !status
+                //         setStatus(result)
+                //     }
+
+                //     const toggleJS=()=>{
+                //         const result1= !status1
+                //         setStatus1(result1)
+                //     }
+
+                //     const toggleNode=()=>{
+                //         const result2= !status2
+                //         setStatus2(result2)
+                //     }
+
+                //     return(
+                //         <div>
+                //             <h1>Show or Hide - Mulitple tech articles</h1>
+                //             {status && <p>React is a JavaScript library used for building user interfaces, specifically for single-page applications.
+                //                 It helps developers create reusable UI components and manage dynamic content efficiently</p>}
+                //             <button onClick={toggleReact}>{status ? 'Hide React article' : 'Show React article'}</button><hr/>
+
+                //             {status1 && <p>JavaScript is a scripting language primarily used to make web pages interactive and dynamic. It's the core
+                //                 programming language that powers both React and Node.js.</p>}
+                //             <button onClick={toggleJS}>{status1 ? 'Hide JS article' : 'Show JS article'}</button><hr/>
+
+                //             {status2 && <p>Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. It allows developers to run JavaScript
+                //                 code on the server, enabling full-stack development with one language.</p>}
+                //             <button onClick={toggleNode}>{status2 ? 'Hide Node article' : 'Show Node article'}</button><hr/>
+                //         </div>
+                //     )
+                // }
+
+                //ReactDOM.render(<ShowOrHideMultipleTexts/>, rootHandle)
+
+                //========================================Standard code below
+
+                function TextDisplay(props){
+                const [status, setStatus] = useState(true)
+                const {title, body} = props //es6 destructuring
+
+                const toggle=()=>{
+                    // const result= !status 
+                    // setStatus(result) //or below
+                    setStatus(!status)
+                }
+
+                return(
+                    <div>
+                        {status && <p>{body}</p>}
+                        <button onClick={toggle}>{status ? 'Hide' : 'Show'} - {title}</button><hr/>
+                    </div>
+                )
+                }
+
+                function App(props){
+                    const data=[{
+                        title:'React article',
+                        body:'React is a JavaScript library used for building user interfaces, specifically for single-page applications. It helps developers create reusable UI components and manage dynamic content efficiently'
+                    },
+
+                    {
+                        title:'JS article',
+                        body:'JavaScript is a scripting language primarily used to make web pages interactive and dynamic. It is the programming language that powers both React and Node.js.'
+                    },
+
+                    {
+                        title:'Node article',
+                        body:'Node.js is a JavaScript runtime built on Chromes V8 JavaScript engine. It allows developers to run JavaScript on the server, enabling full-stack development with one language'
+                    }]
+
+                    return (//as the data above is array of objects so we need to map over each item with an index 
+                        <div>
+                            <h1>Click respective buttons to Show or Hide mulitple articles</h1>
+                            {data.map((ele,i)=>{//passing data to parent via props and use it above by destructuring.
+                                return <TextDisplay key={i} title={ele.title} body={ele.body}/> //or can use <TextDisplay key={i} {...data}/>
+                            })}
+                            
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<App/>, rootHandle)
+        </script>
+    </body>
+</html>

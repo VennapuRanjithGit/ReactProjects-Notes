@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Different ways to performing oper wn we have data within an object
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                //converting object data into List
+                const countries={
+                    India:10,
+                    USA:20,
+                    Australia:30
+                }
+
+                //=========================>Approach no: 1 - 'for in' loop
+
+                //Will use "for in" loop as we know if we want to access elements/data within object 
+                //for in loop doesnt return any kind of a value instead returns undefined
+                // const genList = (countries)=>{
+                //     const result=[]  //create an empty array first
+                //     for (const k in countries){//now loop thru data inside obj above
+                //         result.push(<li key={k}>{k} - {countries[k]}</li>)//push the looped data and assign unique key/id to every element for duplicate avoidablity
+                //     }//for key we are assigning value thru 'k' indirectly unique id
+                //     return result //then return it to result i.e o/p
+                // }
+
+                // //fristly create element and generate simple un ordered list, using same name create function above as we need to generate multiple List(<li></li>) and return them inside function
+                // const ele=(
+                //     <ul>
+                //         {genList(countries)}
+                //     </ul>
+                // )
+
+                //====================> Approach no: 2 - Keys aprch
+                // 1. i.e extract all keys from object first and map over those keys
+                // though map method doesnt work in object but theres a method which can does it
+
+                const ele=(
+                    <ul>
+                        {Object.keys(countries).map((ele)=>{ //extract all keys then use call back function 
+                            return <li key={ele}>{ele} - {countries[ele]}</li>
+                        })}
+                    </ul>
+                )
+
+                ReactDOM.render(ele, rootHandle)
+        </script>
+    </body>
+</html>

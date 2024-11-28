@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                const company1={ 
+                    name:'ww',
+                    email:'din@gmail.com',
+                    phno:'4567899876',
+                    address:'dubai',
+                    pic:'https://www.winwire.com/wp-content/themes/winwirewp-theme/assets/images/logos/logo.png'
+                
+                }
+
+                const company2={
+                    name:'google',
+                    email:'rem@gmail.com',
+                    phno:'678901123',
+                    address:'hyd',
+                    pic:'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png'
+
+                }
+
+                function UserInfo(props){
+                    return (//can handle it separately by using horizontal line
+                        <div>
+                            <img src={props.pic} />
+                            <h2>{props.name}</h2>
+                            <hr/>
+                        </div>
+                    )
+                }
+                
+                //call the same component multiple times i.e by wrapping it inside div tag
+                const ele=(
+                <div>
+                    <UserInfo name={company1.name} pic={company1.pic}/>
+                    <UserInfo name={company2.name} pic={company2.pic}/>
+                    
+                </div>
+                )
+                
+                ReactDOM.render(ele, rootHandle)
+        </script>
+    </body>
+</html>

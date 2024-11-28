@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                //use the useState hook i.e import it
+                const {useState} = React  //here react is library, useState(whos value is a function) is a property inside library; we are importing and using it. 
+                                            //now you can use this useState inside below functional component by declaring state variable and use it
+                function Counter(props){
+                    
+                    const [count, setCount] = useState(0) //count-State varible used to count/store info or holds the number of clicks on btn; setCount used to update the counted data. tehse both are used from useState function and intial state/value is 0 i.e count = 0;
+                    return (
+                        <div>
+                            <h1> {count} </h1>
+                            
+                            <button onClick={()=>{//declare an arrow function i.e inline function //onclick the btn wt to happen i.e count increments by 1 which is updated in setCount that goes into useState() then to count repeats.
+                                setCount(count + 1)
+                            }}>+1</button>
+
+                            <button onClick={()=>
+                                setCount(count - 1)
+                            }>-1</button>
+
+                            <button onClick={()=>{
+                                setCount(0) //set it back to 0 inorder to reset.
+                            }}>Reset</button>
+                        </div>
+                    )
+                }
+
+                
+                ReactDOM.render(<Counter/>, rootHandle)
+        </script>
+    </body>
+</html>

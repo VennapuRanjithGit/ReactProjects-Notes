@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+                Keys
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                const listArray=['react', 'node', 'typeS', 'JS','nextJS','angular'] //here the array data which doesnt have unique values like id:1 etc... so use this approach, but this appraoch isnt feasible
+                const details=(
+                    <ul>
+                        {listArray.map((elem,i)=>{ //map array - every element/item has separate unique key.
+                                return <li key={i}>{elem}</li>
+                        })}
+                    </ul>
+                )
+                ReactDOM.render(details,rootHandle)
+        </script>
+    </body>
+</html>

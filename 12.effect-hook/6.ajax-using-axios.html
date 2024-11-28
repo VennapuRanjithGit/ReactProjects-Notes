@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+        <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                const url = 'https://raw.githubusercontent.com/samayo/country-json/master/src/country-by-capital-city.json'; //fetching data from external server and display on UI can be done by using ajax cal
+                
+                const {useState, useEffect} = React 
+
+                function CountriesList(props){
+                    const [countries, setCountries] = useState([]) //** here the type of the data whtr its array of obj/string/numbers etc that we should confirm by going to the url link and see the type of data that we gonna render here then we use/create the same type of data here in useState. so here it is array of obj. so useState([]) 
+                    
+                    //use useEffect and make a request to external server using xhr Object
+                    useEffect(()=>{
+
+                        //axios code===============================
+                        axios.get(url) //which returns promise object which is used for handling asynchronous behav within our code
+                            .then((response)=>{ //it get called wn data sucessfully receivedy from server and will catch the data as response
+                                //console.log(response)
+                                const result= response.data //or directly setCountries(response.data) i.e standard
+                                setCountries(result)
+                            })
+
+                        //xhr code=================
+                       /* //alert(`component rendered`)
+                        const xhr = new XMLHttpRequest()//create new xhr obj
+                        xhr.open('GET',url)// use open method whr 1st arg is http method GET and next URL of external server stored above
+                        xhr.send()//send a request to server then that server reads or handles this incoming request
+                        xhr.onload=function(){//onload is a prop in xhr obj where we can have access on the data that sent by externa source or url
+                            //console.log(xhr.responseText) //very imp step to do: always check what sort of response/data we got by cosole logging
+                                                            //here the data came from server is JSON formate then we need to convert it into javascript Object
+                        //console.log(JSON.parse(xhr.responseText)) //to do so use JSON.parse method along with the response. //to see whtr its converted properly just console log it.
+                        const result=JSON.parse(xhr.responseText)//parse to convert json into js obj which we need here.
+                        setCountries(result)//then pass the result to state setCountries.
+                    }*/
+
+                    
+                    },[])//useEffect hook toget executed/run only once 
+
+                    return (
+                        <div>
+                            <h1>Length of the countries - {countries.length}</h1>
+                            <ul>
+                                {countries.map((country, i)=>{
+                                    return <li key={i}>{country.country} - {country.city}</li>
+                                })}
+                            </ul>
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<CountriesList/>, rootHandle)
+        </script>
+    </body>
+</html>

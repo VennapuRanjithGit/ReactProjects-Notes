@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+       
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                //importing react hooks specifically useState hook from react library
+                const {useState} = React
+                
+                function RandomNumbers(props){//1. creating a componet i.e parent function/comp called RandomNumbers
+                    
+                    //2. maintain state variable called numbers
+                    //2. dirctly use the above useState hook to declare the below state i.e numbers .e 
+                    const [numbers, setNumbers] = useState([]) //numbers - state variable, setNumbers - updating the state variable numbers; //initally let the array be empty as we donno or dont have any numbers in it instead we need to generate it.
+                    
+                    //callback function //note: we can still update state value inside callback function
+                    const generateRandomNumber=()=>{ //these call back func are pure functions i.e v shoudl not udpdate value of state directly inside callback function i.e pure function 
+                
+                        //================using spreadOpr approach
+                        const randomNumber=Math.round(Math.random()*100)
+                        const newArray=[...numbers, randomNumber]
+                        setNumbers(newArray)
+                     
+                    }
+
+                    //=============using splice method
+                    // const removeItem=(i)=>{
+                    //     const newNumbers=[...numbers] //use spread oprtr //deep copy of array to new variable
+                    //     newNumbers.splice(i,1) //splice removes based on i i.e index and '1' indicates how many numbers to be removed.
+                    //     setNumbers(newNumbers) //call setNumbers and pass newNumbers 
+                    // }
+                    
+                    //===========using filter method
+                    const removeItem=(i)=>{
+                        const result=numbers.filter((ele,index)=>{//no need of deep copy as filter itself creates a new array by default
+                            return index !=i //we working at the index level not element level i.e not array item level instead the index of it.
+                        })//if condition satisfies then resp item gets removed.
+                        setNumbers(result)
+                    }
+
+                    return(//3.display the count of the numbers //4. dispaly a button on the screen called as 'Add'; //insteady of writing logic instead inside below jsx create a function 'generateRadnmNumb' above then give its reference in below event handler which is a good practice.
+                        <div>
+                            <h1>Total Count of the Numbers - {numbers.length}</h1>
+                            <button onClick={generateRandomNumber}>Add</button>
+                            <ul>
+                                {numbers.map((ele, i)=>{//to dispaly the list of numbers that generated as unordered list. ele indicates numbers and i as index using i it maps over each item in array and displays.
+                                    return <li key={i}>{ele}
+                                                <button onClick={()=>{
+                                                    removeItem(i) //i refers to index
+                                                }}>Remove</button>
+                                            </li>
+                                })}
+                            </ul>
+                        </div>
+                    )
+                }
+
+                //displaying RandomNumbers on screen
+                ReactDOM.render(<RandomNumbers/>, rootHandle)   
+        </script>
+    </body>
+</html>

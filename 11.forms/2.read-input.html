@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            1.Read text-input value (Not only on state but also can render on UI)
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="../js/react.development.js"></script>
+        <script src="../js/react-dom.development.js"></script>
+        <script src="../js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                const {useState} = React 
+
+                function UserInfo(props){
+                    const [username, setUsername] = useState('')
+                    const [userbio, setUserbio] = useState('')
+
+                    const handleUsernameChange=(e)=>{
+                        const usernameInput = e.target.value
+                        setUsername(usernameInput)
+                    }
+
+                    const handleUserbioChange=(e)=>{
+                        const userbioInput = e.target.value
+                        setUserbio(userbioInput)
+                    }
+                    return(//always create any of input fileds inside a form tag like below; wnevr input field is controlled by react state i.e stateVariable , we need to have event handler to listen to change/update of that particular value
+                    //what user types, will be displayed there itself which is advantage by controlled components. which is a cleaner way of handling data/reading data.
+                    <div>
+                        <h1>{username}</h1> 
+                        <p>{userbio}</p>
+
+                        <form>
+                            <label>UserName</label> <br/>
+                            <input type='text' value={username} onChange={handleUsernameChange}/> <br/>
+
+                            <label>Bio</label> <br/>
+                            <textarea type='text' value={userbio} onChange={handleUserbioChange}/>
+                        </form>
+                    </div>
+                    )
+                }
+
+                ReactDOM.render(<UserInfo/>, rootHandle)
+        </script>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello World - ReactJS</title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+                //JSX
+                // const element=<h1>Hellow world Lets think in ReactJS</h1>
+                // console.log(element) //use this to show the detailed out put with properties in browser console.
+                //in order to render the above element onto webpage/execute it, i.e render it inside Id="root" i.e
+                //we need to render it roothandle i.e indirectly Div container on to webpage so use both in below code.
+                //ReactDOM.render(element,rootHandle) //above dom package is responsible for render react elements on to the web page. here ReactDOM.render() present inside above DOM package thus we will use it.
+                //------------------------
+                //if we want to show one vaiable data thru other(i.e inside jsx code) i.e below by embedding it using {}
+                const msg='Hello world(string)'
+                const element =<h1>{msg}</h1>
+                ReactDOM.render(element,rootHandle)
+                //--------------------------
+                
+        </script>
+    </body>
+</html>

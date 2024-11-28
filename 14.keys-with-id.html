@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            User list through map loop inside JSX
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.js"></script>
+
+        <script type="text/babel">
+                const rootHandle=document.getElementById('root')
+
+                //declaring array Object
+                const user=[ //array of objects which has unique values or ids so follow this approach
+                    {id:1, name:'user1', email:'1@gmail.com'},
+                    {id:2, name:'user2', email:'2@email.com'},
+                    {id:3, name:'user3', email:'3@email.com'},
+                    {id:4, name:'user4', email:'4@email.com'},
+                    {id:5, name:'user5', email:'5@email.com'}
+                ]
+
+                //specifying keys with ids
+                const element=(
+                    <div>
+                        <h2>Listing users - {user.length}</h2>
+                        <ul>
+                            {user.map((ele)=>{
+                                return <li key={ele.id}>{ele.name}</li> 
+                            })}
+                        </ul>
+                        
+                        <ul>
+                            {user.map((ele)=>{
+                                return <li key={ele.id}>{ele.email}</li>
+                            })}
+                        </ul>
+                    </div>
+                )
+                ReactDOM.render(element,rootHandle)
+        </script>
+    </body>
+</html>

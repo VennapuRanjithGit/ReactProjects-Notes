@@ -1,0 +1,86 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <title>
+            Counter with Redux
+        </title>
+    </head>
+
+    <body>
+          <script src="./redux.js"></script>  
+
+          <script>
+        //1. create a store; responsible for creating a store object; Redux store contains state along with other methods and objects.
+          const {createStore, combineReducers} = Redux // 2. create reducer arrow function; in redux apps combineReducer fun are needed for combining multiple reducers into 1
+
+          //3.action obje i.e what happed is indicated by action; here action is increment next dispatch it below
+          const increment=(()=>{ //action or action creator which returns javascript func
+            return {
+              type:'INCREMENT'
+            }
+          })
+
+          //action creator for decrement
+          const decrement =(()=>{
+            return {
+              type:'DECREMENT'
+            }
+          })
+ 
+          //action creator for reset
+          const reset=(()=>{
+            return{
+              type:'RESET'
+            }
+          })
+
+          //action creator for increment by a number
+          const incrementBy=((n)=>{
+            return{
+              type: 'INCREMENT_BY',
+              payload:n
+            }
+          })
+
+          const countInitialState=0 //lets say intial value is 0 //below redux app will pass the inital state and action obj to the reducer
+          const countReducer=(state=countInitialState, action)=>{ //as per our requirement create a countReducer
+              if(action.type==='INCREMENT'){
+                  return state+1
+              }else if(action.type==='DECREMENT'){
+                  return state-1
+              } else if(action.type==='RESET'){
+                return countInitialState
+              } else if(action.type==='INCREMENT_BY'){
+                return state + action.payload //current state + number that given at payload
+              }
+                else {
+                  return state //returns state which countIntistate =0
+              } //dispatching is done next subscribe to the store which like alerting wnver state value changes; subscribe method below
+            } 
+          
+          //2. reducer is how state value is changed decided by reducer
+          const store=createStore(combineReducers({ //this combineRedu obj should be filled it out with reducers like below
+            count: countReducer  //next create countaction
+          }))
+
+          console.log('store', store) //here we can see store state and other methods and obj
+
+          store.subscribe(()=>{
+            console.log(store.getState()) //to knwow the state value of the store i.e count: value 0 is shown
+          })//wnvr state changes it will alert and get new state value
+
+          store.dispatch(increment()) //dispatching above increment aciton so this will now available inside countReducer above 
+                                      //which performs neccesary oprn and returns new state value; no of times dispatching= no of time state changes.
+          store.dispatch(increment()) //above is increment from 0 to 1; now 1 to 2
+          
+          store.dispatch(decrement())
+          store.dispatch(increment())
+
+          store.dispatch(reset())
+
+          store.dispatch(incrementBy(20))
+        </script>
+    </body>
+</html>
+<!-- 1. Create sotre
+    2. create reducer arrow function-->
